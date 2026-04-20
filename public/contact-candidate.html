@@ -348,15 +348,12 @@
           <fieldset class="form-fieldset">
             <legend class="form-legend">Submit Your Resume</legend>
             <div class="form-group">
-              <p style="color: #666; margin-bottom: 15px;">
-                <strong>To submit your resume/CV:</strong> Please send it directly to 
-                <a href="mailto:giantminds3@gmail.com" style="color: var(--color-primary); font-weight: 600; text-decoration: none;">
-                  giantminds3@gmail.com
-                </a>
-              </p>
-              <p style="color: #999; font-size: 0.95em; margin: 0;">
-                <i class="fas fa-info-circle"></i> Include your name in the email subject line so we can match it to your application.
-              </p>
+              <label for="candidate_cv">Upload Resume/CV <span class="required">*</span></label>
+              <div class="file-input-wrapper">
+                <input type="file" id="candidate_cv" name="resume" accept=".pdf,.doc,.docx" required />
+                <span class="file-input-label">Choose file (PDF, DOC, DOCX)</span>
+              </div>
+              <small class="form-hint">Maximum file size: 5MB.</small>
             </div>
           </fieldset>
 

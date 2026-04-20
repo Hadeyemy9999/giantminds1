@@ -41,8 +41,8 @@ module.exports = async (req, res) => {
     // v3 returns array for files too.
     const resumeFile = files?.resume?.[0] || files?.resume;
 
-    if (!name || !email || !career_field || !career_goals) {
-      return res.status(400).send('Missing required candidate fields.');
+    if (!name || !email || !career_field || !career_goals || !resumeFile) {
+      return res.status(400).send('Missing required candidate fields or resume upload.');
     }
 
     let filePayload = null;
