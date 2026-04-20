@@ -198,38 +198,81 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 5. Unified Form Submission Handler (with Formspree integration)
+  // 5. Unified Form Submission Handler
   const successMessage = document.getElementById("success-message");
 
-  // Check for CANDIDATE form
+  function showSuccess(message) {
+    if (!successMessage) return;
+    successMessage.innerHTML = `
+      <i class="fas fa-check-circle"></i>
+      <h4>Success!</h4>
+      <p>${message}</p>
+    `;
+    successMessage.style.display = "block";
+  }
+
+  function showError(form, errorText) {
+    const errorElement = form.querySelector(".form-error-message");
+    if (errorElement) {
+      errorElement.textContent = errorText;
+      errorElement.style.display = "block";
+    } else {
+      alert(errorText);
+    }
+  }
+
+  async function handleFormSubmit(event, apiPath, fileInput, maxFileSizeMB, successText) {
+    event.preventDefault();
+    const form = event.target;
+    const file = fileInput?.files?.[0];
+
+    if (file && file.size / (1024 * 1024) > maxFileSizeMB) {
+      showError(form, `File size exceeds ${maxFileSizeMB}MB limit.`);
+      return;
+    }
+
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch(apiPath, {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        const text = await response.text();
+        showError(form, text || "Submission failed.");
+        return;
+      }
+
+      showSuccess(successText);
+      form.reset();
+    } catch (error) {
+      showError(form, error.message || "Submission failed.");
+    }
+  }
+
+  // Candidate form submission
   const candidateForm = document.getElementById("candidate-form");
   if (candidateForm) {
     candidateForm.addEventListener("submit", function (e) {
-      // Validate file before submission
-      if (candidateCV && candidateCV.files.length > 0) {
-        if (!validateFileSize(candidateCV, 5)) {
-          e.preventDefault();
-          return false;
-        }
+      if (candidateCV && candidateCV.files.length > 0 && !validateFileSize(candidateCV, 5)) {
+        e.preventDefault();
+        return;
       }
-      // Allow form to submit to Formspree (no preventDefault)
-      // Form will redirect after successful submission
+      handleFormSubmit(e, "/api/submit-candidate", candidateCV, 5, "Thank you for submitting your profile. Our team will review your application and reach out soon.");
     });
   }
 
-  // Check for PARTNER form
+  // Partner form submission
   const partnerForm = document.getElementById("partner-form");
   if (partnerForm) {
     partnerForm.addEventListener("submit", function (e) {
-      // Validate file before submission (if present)
-      if (partnerDoc && partnerDoc.files.length > 0) {
-        if (!validateFileSize(partnerDoc, 10)) {
-          e.preventDefault();
-          return false;
-        }
+      if (partnerDoc && partnerDoc.files.length > 0 && !validateFileSize(partnerDoc, 10)) {
+        e.preventDefault();
+        return;
       }
-      // Allow form to submit to Formspree (no preventDefault)
-      // Form will redirect after successful submission
+      handleFormSubmit(e, "/api/submit-partner", partnerDoc, 10, "Thank you for your inquiry. Our team will review your request and respond shortly.");
     });
   }
 
