@@ -66,3 +66,9 @@ module.exports = async (req, res) => {
     return res.status(500).send(`Failed to send partner submission email: ${error.message}`);
   }
 };
+
+module.exports.config = {
+  api: {
+    bodyParser: false,
+  },
+};

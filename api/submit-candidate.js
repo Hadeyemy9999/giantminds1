@@ -64,3 +64,9 @@ module.exports = async (req, res) => {
     return res.status(500).send(`Failed to send candidate submission email: ${error.message}`);
   }
 };
+
+module.exports.config = {
+  api: {
+    bodyParser: false,
+  },
+};
