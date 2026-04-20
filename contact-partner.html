@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Giant Minds Enterprise: Partner or Hire Top Talent</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- Import Modern Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Using Font Awesome for icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+
+    <style>
+      /* Specific Styles for Contact Page Layout and Form (Internal CSS for this page's layout) */
+      .contact-hero {
+        background-color: #f7f7f7;
+        padding: 80px 0 50px;
+        text-align: center;
+      }
+      .contact-hero h2 {
+        margin-bottom: 10px;
+        color: var(--color-primary);
+      }
+      .contact-hero p {
+        font-size: 1.15em;
+        color: var(--color-text-dark);
+        max-width: 700px;
+        margin: 0 auto 40px;
+      }
+      .contact-content {
+        display: flex;
+        gap: 40px;
+        padding: 60px 0;
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+      .contact-info,
+      .contact-form-container {
+        flex: 1;
+      }
+      .contact-info {
+        padding: 20px;
+        background-color: var(--color-white);
+        border-radius: 10px;
+        box-shadow: var(--box-shadow-subtle);
+        align-self: stretch;
+      }
+      .contact-info h3 {
+        text-align: left;
+        border-bottom: 2px solid var(--color-secondary);
+        padding-bottom: 15px;
+        margin-bottom: 25px;
+      }
+      .contact-info ul {
+        list-style: none;
+        padding: 0;
+      }
+      .contact-info ul li {
+        font-size: 1.1em;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+      }
+      .contact-info ul li i {
+        color: var(--color-primary);
+        margin-right: 15px;
+        font-size: 1.5em;
+      }
+
+      /* Form Styling */
+      .contact-form-container {
+        padding: 30px;
+        background-color: var(--color-white);
+        border-radius: 10px;
+        box-shadow: var(--box-shadow-card);
+      }
+      .form-group {
+        margin-bottom: 20px;
+      }
+      .form-group label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: var(--color-text-dark);
+      }
+      .form-group input,
+      .form-group textarea,
+      .form-group select {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 1em;
+        transition: border-color 0.3s;
+      }
+      .form-group input:focus,
+      .form-group textarea:focus,
+      .form-group select:focus {
+        border-color: var(--color-primary);
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(204, 0, 0, 0.2);
+      }
+      .form-group textarea {
+        resize: vertical;
+        min-height: 120px;
+      }
+      .submit-button {
+        width: 100%;
+        padding: 15px;
+        background-color: var(--color-primary);
+        color: var(--color-white);
+        border: none;
+        border-radius: 50px;
+        font-size: 1.1em;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s;
+        text-transform: uppercase;
+      }
+      .submit-button:hover {
+        background-color: var(--color-secondary);
+        transform: translateY(-2px);
+      }
+
+      /* Fieldset Styling */
+      .form-fieldset {
+        border: none;
+        padding: 0 0 25px 0;
+        margin-bottom: 25px;
+        border-bottom: 2px solid #e8e8e8;
+      }
+      .form-fieldset:last-of-type {
+        border-bottom: none;
+      }
+      .form-legend {
+        font-size: 1.1em;
+        font-weight: 700;
+        color: var(--color-primary);
+        margin-bottom: 20px;
+        padding: 0;
+        display: block;
+      }
+
+      /* Required Field Indicator */
+      .required {
+        color: var(--color-primary);
+        font-weight: 700;
+        margin-left: 2px;
+      }
+
+      /* File Input Styling */
+      .file-input-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+        border: 2px dashed #ddd;
+        border-radius: 6px;
+        padding: 15px;
+        background-color: #f9f9f9;
+        transition: all 0.3s;
+      }
+      .file-input-wrapper:hover {
+        border-color: var(--color-primary);
+        background-color: #fff5f5;
+      }
+      .file-input-wrapper input[type="file"] {
+        display: none;
+      }
+      .file-input-label {
+        flex: 1;
+        font-weight: 500;
+        color: #666;
+        cursor: pointer;
+        padding: 0;
+        border: none;
+        background: none;
+      }
+      .file-input-wrapper input[type="file"]:focus + .file-input-label {
+        color: var(--color-primary);
+      }
+      /* Show selected filename */
+      .file-input-wrapper input[type="file"] {
+        cursor: pointer;
+      }
+
+      /* Form Hint Text */
+      .form-hint {
+        display: block;
+        font-size: 0.85em;
+        color: #999;
+        margin-top: 6px;
+        font-style: italic;
+      }
+
+      /* Success Message Modal */
+      #success-message {
+        display: none;
+        text-align: center;
+        padding: 40px;
+        border-radius: 10px;
+        background-color: #e6ffe6;
+        color: #1a7a1a;
+        border: 1px solid #99ff99;
+        margin-top: 20px;
+      }
+      #success-message i {
+        font-size: 3em;
+        color: #1a7a1a;
+        margin-bottom: 15px;
+      }
+
+      @media (max-width: 768px) {
+        .contact-content {
+          flex-direction: column;
+          gap: 20px;
+        }
+        .contact-info {
+          padding: 30px 20px;
+        }
+      }
+
+      /* Disclaimer Styling */
+      .disclaimer {
+        text-align: center;
+        padding: 40px 20px;
+        background-color: #fff3cd;
+        border: 1px solid #ffeaa7;
+        border-radius: 10px;
+        margin: 40px auto;
+        max-width: 800px;
+        box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+      }
+      .disclaimer h3 {
+        color: #856404;
+        font-size: 1.5em;
+        margin-bottom: 20px;
+      }
+      .disclaimer p {
+        font-size: 1.1em;
+        color: #856404;
+        margin-bottom: 10px;
+      }
+      .disclaimer .account-details {
+        font-weight: bold;
+        font-size: 1.2em;
+        color: #d39e00;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 1. Navigation Bar (Identical to Index) -->
+    <header class="navbar">
+      <div class="container">
+        <nav id="main-nav">
+          <ul>
+            <li><a href="index.html#hero">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="vision-mission.html">Vision & Mission</a></li>
+            <li>
+              <a href="contact-candidate.html" class="cta-link">For Candidates</a>
+            </li>
+            <li>
+              <a href="contact-partner.html" class="cta-link">For Partners</a>
+            </li>
+          </ul>
+        </nav>
+        <a href="index.html" class="logo">
+          <div class="logo-container">
+            <img src="images/logo.jpg" alt="GIANT MINDS Logo" class="logo-image" />
+            <span class="logo-text">Giant Minds</span>
+          </div>
+        </a>
+
+        <button
+          class="hamburger"
+          aria-expanded="false"
+          aria-controls="main-nav"
+        >
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+      </div>
+    </header>
+    <!-- Page Header -->
+    <section class="contact-hero">
+      <div class="container">
+        <h2>Join the GIANT MINDS Network</h2>
+        <p>
+          Whether you're looking to hire elite talent, provide specialized
+          training, or mentor the next generation, we want to hear from you.
+        </p>
+      </div>
+    </section>
+
+    <!-- Contact Form & Info Section -->
+    <div class="container contact-content section">
+      <!-- 1. Contact Information and Why Us (Partner Focus) -->
+      <div class="contact-info reveal">
+        <h3>Benefits of Becoming a Spoke Partner</h3>
+        <ul>
+          <li>
+            <i class="fas fa-handshake"></i> <strong>Employer Partners:</strong> Access
+            pre-vetted candidates tailored to your specific job requirements.
+          </li>
+          <li>
+            <i class="fas fa-certificate"></i> <strong>Training Institutions:</strong> Gain
+            accreditation and feed your students directly into top job
+            pipelines.
+          </li>
+          <li>
+            <i class="fas fa-users"></i> <strong>Mentors/Experts:</strong> Leverage the GIANT
+            MINDS brand to expand your industry influence and guide rising
+            stars.
+          </li>
+        </ul>
+      </div>
+
+      <!-- 2. Partner Form -->
+      <div class="contact-form-container reveal">
+        <h3 class="red-text" style="text-align: center">Partner Inquiry</h3>
+
+        <form id="partner-form" action="https://formspree.io/f/xeoykola" method="POST" enctype="multipart/form-data">
+          <!-- Organization Information Section -->
+          <fieldset class="form-fieldset">
+            <legend class="form-legend">Organization Information</legend>
+
+            <div class="form-group">
+              <label for="partner_name">Your Name <span class="required">*</span></label>
+              <input type="text" id="partner_name" name="name" placeholder="Jane Smith" required />
+            </div>
+
+            <div class="form-group">
+              <label for="partner_company">Company / Institution Name <span class="required">*</span></label>
+              <input type="text" id="partner_company" name="company" placeholder="ACME Corporation" required />
+            </div>
+
+            <div class="form-group">
+              <label for="partner_email">Work Email <span class="required">*</span></label>
+              <input type="email" id="partner_email" name="email" placeholder="jane@company.com" required />
+            </div>
+          </fieldset>
+
+          <!-- Partnership Details Section -->
+          <fieldset class="form-fieldset">
+            <legend class="form-legend">Partnership Details</legend>
+
+            <div class="form-group">
+              <label for="partner_type">Partner Type <span class="required">*</span></label>
+              <select id="partner_type" name="partner_type" required>
+                <option value="">-- Select a type --</option>
+                <option value="Employer">Employer / Hiring Partner</option>
+                <option value="Training">Training Institution / Academy</option>
+                <option value="Mentor">Mentor / Industry Expert</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="partner_needs">Specific Needs or Inquiry <span class="required">*</span></label>
+              <textarea id="partner_needs" name="needs" placeholder='e.g., "We need 5 Java Developers" or "We offer Cybersecurity training"' required></textarea>
+            </div>
+          </fieldset>
+
+          <!-- Document Upload Section -->
+          <fieldset class="form-fieldset">
+            <legend class="form-legend">Supporting Documents</legend>
+
+            <div class="form-group">
+              <label for="partner_doc">Upload Document (Optional)</label>
+              <div class="file-input-wrapper">
+                <input type="file" id="partner_doc" name="document" accept=".pdf,.doc,.docx,.jpg,.png" />
+                <span class="file-input-label">Choose file (PDF, DOC, DOCX, JPG, PNG)</span>
+              </div>
+              <small class="form-hint">Maximum file size: 10MB. Include job descriptions, company profiles, or training materials.</small>
+            </div>
+          </fieldset>
+
+          <button type="submit" class="submit-button" id="submitBtn">
+            Submit Partnership Inquiry
+          </button>
+        </form>
+
+        <!-- Success Message (Requires JS logic) -->
+        <div id="success-message">
+          <i class="fas fa-check-circle"></i>
+          <h4>Inquiry Received!</h4>
+          <p>
+            Thank you for your interest in partnering with GIANT MINDS. Our team
+            will review your inquiry and be in touch shortly to discuss next
+            steps.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Disclaimer Section -->
+    <div class="disclaimer">
+      <h3>Important Payment Disclaimer</h3>
+      <p>Any payment should not be made to any account except the company account as follows:</p>
+      <p class="account-details">
+        Account Name: Giant Minds Enterprise<br>
+        Account Number: 1311435057<br>
+        Banker: Zenith Bank
+      </p>
+    </div>
+
+    <!-- 7. Footer (Identical to Index) -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col logo-info">
+            <h4 class="logo">GIANT MINDS</h4>
+            <p>
+              Building a system that works. Fueling your next breakthrough hire.
+            </p>
+          </div>
+          <div class="footer-col">
+            <h4>Navigation</h4>
+            <ul>
+              <li><a href="index.html#hero">Home</a></li>
+              <li><a href="index.html#about">About Us</a></li>
+              <li><a href="index.html#network">Our Network</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Legal</h4>
+            <ul>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Terms of Service</a></li>
+            </ul>
+          </div>
+          <div class="footer-col social-links">
+            <h4>Connect</h4>
+            <a href="https://www.instagram.com/7giantminds/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+            <a href="https://x.com/7GiantMinds" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
+            <a href="mailto:giantminds3@gmail.com"><i class="fas fa-envelope"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p>&copy; <span id="year"></span> GIANT MINDS. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!-- Link JavaScript file for interactivity -->
+    <script src="script.js"></script>
+  </body>
+</html>

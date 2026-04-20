@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Giant Minds Enterprise: Our Aim & The Engine</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- Import Modern Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Using Font Awesome for icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+
+    <style>
+      /* Specific Styles for About Page */
+      .page-hero {
+        background-color: #f7f7f7;
+        padding: 100px 0 50px;
+        text-align: center;
+      }
+      .page-hero h2 {
+        margin-bottom: 15px;
+        color: var(--color-primary);
+      }
+      .page-hero p {
+        font-size: 1.2em;
+        color: var(--color-text-dark);
+        max-width: 800px;
+        margin: 0 auto 40px;
+        font-weight: 300;
+      }
+
+      .content-block {
+        padding: 50px 0;
+      }
+      .content-block h3 {
+        text-align: left;
+        margin-bottom: 25px;
+        color: var(--color-text-dark);
+        font-size: 2em;
+      }
+
+      /* Mission/Vision Box */
+      .mission-box {
+        background-color: var(--color-primary);
+        color: var(--color-white);
+        padding: 40px;
+        border-radius: 12px;
+        margin-bottom: 60px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      }
+      .mission-box h3 {
+        color: var(--color-white);
+        text-align: center;
+        border-bottom: 2px solid var(--color-secondary);
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+      }
+      .mission-box p {
+        font-size: 1.1em;
+        text-align: center;
+      }
+
+      /* Key Resources (The Engine) Grid */
+      .resource-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+      }
+      .resource-card {
+        background: var(--color-white);
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: var(--box-shadow-card);
+        border-top: 5px solid var(--color-primary);
+        transition: transform 0.3s ease;
+      }
+      .resource-card:hover {
+        transform: translateY(-5px);
+      }
+      .resource-card i {
+        font-size: 3em;
+        color: var(--color-primary);
+        margin-bottom: 15px;
+      }
+      .resource-card h4 {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+      }
+
+      /* Jeante Movement Tower Diagram */
+      .tower-diagram {
+        text-align: center;
+        padding: 40px;
+        background-color: #eee;
+        border-radius: 10px;
+        margin-bottom: 50px;
+      }
+      .tower-diagram h4 {
+        font-size: 1.8em;
+        color: var(--color-text-dark);
+      }
+      .tower-diagram p {
+        margin-bottom: 20px;
+        font-style: italic;
+      }
+      .tower-diagram .icon-flow {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 30px;
+        position: relative;
+      }
+      .tower-diagram .icon-flow > div {
+        width: 30%;
+        text-align: center;
+      }
+      .tower-diagram .flow-icon {
+        font-size: 3em;
+        color: var(--color-primary);
+        border: 3px solid var(--color-primary);
+        border-radius: 50%;
+        padding: 15px;
+        background-color: var(--color-white);
+      }
+      .tower-diagram .arrow {
+        position: absolute;
+        width: 35%;
+        left: 15%;
+        top: 50%;
+        border-top: 2px dashed #999;
+        z-index: 1;
+      }
+      .tower-diagram .arrow::after {
+        content: ">>";
+        position: absolute;
+        right: 0;
+        top: -10px;
+        color: #999;
+        font-size: 1.2em;
+      }
+      .tower-diagram .arrow.reverse {
+        left: 50%;
+        width: 35%;
+        border-top: 2px dashed #999;
+      }
+      .tower-diagram .arrow.reverse::after {
+        content: "<<";
+        left: 0;
+        right: auto;
+      }
+
+      @media (max-width: 768px) {
+        .tower-diagram .icon-flow {
+          flex-direction: column;
+        }
+        .tower-diagram .icon-flow > div {
+          width: 100%;
+          margin-bottom: 20px;
+        }
+        .tower-diagram .arrow,
+        .tower-diagram .arrow.reverse {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 1. Navigation Bar (Identical to Index) -->
+    <header class="navbar">
+      <div class="container">
+        <nav id="main-nav">
+          <ul>
+            <li><a href="index.html#hero">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="vision-mission.html">Vision & Mission</a></li>
+            <li>
+              <a href="contact-candidate.html" class="cta-link">For Candidates</a>
+            </li>
+            <li>
+              <a href="contact-partner.html" class="cta-link">For Partners</a>
+            </li>
+          </ul>
+        </nav>
+        <a href="index.html" class="logo">
+          <div class="logo-container">
+            <img src="images/logo.jpg" alt="GIANT MINDS Logo" class="logo-image" />
+            <span class="logo-text">Giant Minds</span>
+          </div>
+        </a>
+
+        <button
+          class="hamburger"
+          aria-expanded="false"
+          aria-controls="main-nav"
+        >
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-hero section reveal">
+      <div class="container">
+        <h2>The Engine Behind Breakthroughs</h2>
+        <p>
+          GIANT MINDS is focused on Job Placement & Career Development. We are
+          the central force ensuring quality, curation, and connectivity within
+          the Jeante Movement Tower.
+        </p>
+      </div>
+    </section>
+
+    <!-- Mission & Vision -->
+    <div class="container content-block reveal">
+      <div class="mission-box">
+        <h3>Our Aim & Standardization of Quality</h3>
+        <p>
+          We are committed to <strong>setting and maintaining a high standard for all
+          services</strong> provided under the *JEANTE MOVEMENT TOWER brand* & *THE
+          SPOKES* (Training, Mentorship, Placement), ensuring reliable and
+          transformative results for both our candidates and employer partners.
+        </p>
+      </div>
+    </div>
+
+    <!-- The Engine (Key Resources) -->
+    <div class="container content-block reveal">
+      <h3>Key Resources: The Engine</h3>
+      <p class="intro-text" style="margin-bottom: 30px">
+        These core assets provide the strategic power and intellectual capital
+        necessary for flawless execution and sustainable growth.
+      </p>
+
+      <div class="resource-grid">
+        <div class="resource-card">
+          <i class="fas fa-users-cog"></i>
+          <h4>6FIVE EMPIRE Management Team</h4>
+          <p>
+            The intellectual and human capital at the center responsible for
+            strategy and execution, guaranteeing leadership and stability.
+          </p>
+        </div>
+
+        <div class="resource-card">
+          <i class="fas fa-database"></i>
+          <h4>Proprietary Talent Database</h4>
+          <p>
+            A unique, curated database of pre-vetted candidates and exclusive
+            partner job openings, streamlining the match process.
+          </p>
+        </div>
+
+        <div class="resource-card">
+          <i class="fas fa-crown"></i>
+          <h4>The GIANT MINDS Brand Equity</h4>
+          <p>
+            The reputation and trust built among job seekers and employers,
+            acting as a guarantee of quality and commitment.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Jeante Movement Tower Diagram -->
+    <div class="container content-block reveal">
+      <div class="tower-diagram">
+        <h4>The Jeante Movement Tower & Key Partners (The Spokes)</h4>
+        <p>GIANT MINDS coordinates the flow of talent across the network.</p>
+
+        <div class="icon-flow">
+          <div>
+            <i class="flow-icon fas fa-user-graduate"></i>
+            <p style="font-weight: 600">Training Partners</p>
+          </div>
+
+          <span class="arrow"></span>
+          <span class="arrow reverse"></span>
+
+          <div>
+            <i class="flow-icon fas fa-cogs"></i>
+            <p style="font-weight: 600">GIANT MINDS (Curation)</p>
+          </div>
+
+          <div>
+            <i class="flow-icon fas fa-briefcase"></i>
+            <p style="font-weight: 600">Employer Partners</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. Footer (Identical to Index) -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col logo-info">
+            <h4 class="logo">GIANT MINDS</h4>
+            <p>
+              Building a system that works. Fueling your next breakthrough hire.
+            </p>
+          </div>
+          <div class="footer-col">
+            <h4>Navigation</h4>
+            <ul>
+              <li><a href="index.html#hero">Home</a></li>
+              <li><a href="#">About Us</a></li>
+              <li><a href="index.html#network">Our Network</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Legal</h4>
+            <ul>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Terms of Service</a></li>
+            </ul>
+          </div>
+          <div class="footer-col social-links">
+            <h4>Connect</h4>
+            <a href="https://www.instagram.com/7giantminds/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+            <a href="https://x.com/7GiantMinds" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
+            <a href="mailto:giantminds3@gmail.com"><i class="fas fa-envelope"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p>&copy; <span id="year"></span> GIANT MINDS. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!-- Link JavaScript file for interactivity -->
+    <script src="script.js"></script>
+  </body>
+</html>
