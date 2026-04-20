@@ -2,10 +2,10 @@
   "name": "giantminds-backend",
   "version": "1.0.0",
   "description": "Backend for Giant Minds contact forms and resume uploads",
-  "main": "server.js",
+  "main": "local-server.js",
   "scripts": {
-    "start:local": "node server.js",
-    "dev:local": "nodemon server.js"
+    "start:local": "node local-server.js",
+    "dev:local": "nodemon local-server.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
