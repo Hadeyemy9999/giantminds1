@@ -144,7 +144,7 @@ https://github.com/YOUR-USERNAME/giantminds.git
 Back in Git Bash, add the link to your GitHub repository:
 
 ```bash
-git remote add origin https://github.com/YOUR-USERNAME/giantminds.git
+git remote add origin https://github.com/Hadeyemy9999/giantminds.git
 ```
 
 **Replace `YOUR-USERNAME` with your actual GitHub username**
