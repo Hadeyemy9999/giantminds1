@@ -32,19 +32,30 @@ module.exports = async (req, res) => {
 
   try {
     const { fields, files } = await parseForm(req);
-    const { name, email, phone, career_field, career_goals } = fields;
-    const resumeFile = files?.resume;
+    const name = fields.name?.[0] || fields.name;
+    const email = fields.email?.[0] || fields.email;
+    const phone = fields.phone?.[0] || fields.phone || '';
+    const career_field = fields.career_field?.[0] || fields.career_field;
+    const career_goals = fields.career_goals?.[0] || fields.career_goals;
+    
+    // v3 returns array for files too.
+    const resumeFile = files?.resume?.[0] || files?.resume;
 
-    if (!name || !email || !career_field || !career_goals || !resumeFile) {
-      return res.status(400).send('Missing required candidate fields or resume upload.');
+    if (!name || !email || !career_field || !career_goals) {
+      return res.status(400).send('Missing required candidate fields.');
     }
 
-    const resumePath = resolveFilePath(resumeFile);
-    if (!resumePath) {
-      return res.status(400).send('Invalid resume upload.');
+    let filePayload = null;
+    if (resumeFile) {
+      const resumePath = resolveFilePath(resumeFile);
+      if (!resumePath) {
+        return res.status(400).send('Invalid resume upload.');
+      }
+      filePayload = {
+        originalname: resumeFile.originalFilename || resumeFile.newFilename || resumeFile.name,
+        buffer: await fs.promises.readFile(resumePath),
+      };
     }
-
-    const resumeBuffer = await fs.promises.readFile(resumePath);
 
     await sendCandidateEmail({
       name,
@@ -52,10 +63,7 @@ module.exports = async (req, res) => {
       phone,
       career_field,
       career_goals,
-      file: {
-        originalname: resumeFile.originalFilename || resumeFile.newFilename || resumeFile.name,
-        buffer: resumeBuffer,
-      },
+      file: filePayload,
     });
 
     return res.status(200).json({ success: true });

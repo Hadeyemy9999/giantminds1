@@ -32,8 +32,13 @@ module.exports = async (req, res) => {
 
   try {
     const { fields, files } = await parseForm(req);
-    const { name, company, email, partner_type, needs } = fields;
-    const documentFile = files?.document;
+    const name = fields.name?.[0] || fields.name;
+    const company = fields.company?.[0] || fields.company;
+    const email = fields.email?.[0] || fields.email;
+    const partner_type = fields.partner_type?.[0] || fields.partner_type;
+    const needs = fields.needs?.[0] || fields.needs;
+
+    const documentFile = files?.document?.[0] || files?.document;
 
     if (!name || !company || !email || !partner_type || !needs) {
       return res.status(400).send('Missing required partner fields.');
